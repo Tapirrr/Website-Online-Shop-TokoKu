@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="../src/output.css">
+</head>
+<body>
+  
+  
+
+<nav class="bg-[#134cbd] w-full z-20 top-0 border-b-2 sticky top-0 z-40">
+  <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+    <button onclick="navigate('home')" class="flex items-center space-x-3 rtl:space-x-reverse">
+      <img src="../assets/Gemini_Generated_Image_x6c4c1x6c4c1x6c4-removebg-preview (2).png" class="h-7" alt="" />
+      <p class="h-7 font-bold self-center text-xl text-white font-semibold whitespace-nowrap">Toko<span class="text-white">Ku</span></p>
+    </button>
+
+    <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse gap-3">
+
+      <button onclick="" class="">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+          <path d="M0 0h24v24H0z" fill="none" />
+          <path fill="#fff" d="M17 18a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2M1 2h3.27l.94 2H20a1 1 0 0 1 1 1c0 .17-.05.34-.12.5l-3.58 6.47c-.34.61-1 1.03-1.75 1.03H8.1l-.9 1.63l-.03.12a.25.25 0 0 0 .25.25H19v2H7a2 2 0 0 1-2-2c0-.35.09-.68.24-.96l1.36-2.45L3 4H1zm6 16a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2m9-7l2.78-5H6.14l2.36 5z" />
+        </svg>
+      </button>
+
+      <!-- Tampil saat BELUM login -->
+      <a id="btn-login" href="login.html"
+         class="text-white bg-[#4270ca] hover:bg-white/30 font-medium rounded-lg text-sm px-4 py-2 transition">
+        Login
+      </a>
+
+      <!-- Tampil saat SUDAH login (hidden by default) -->
+      <a id="btn-profile" href="profile.html"
+         class="hidden flex text-sm bg-neutral-primary rounded-full md:me-0 focus:ring-4 focus:ring-neutral-tertiary">
+        <span class="sr-only">Open user profile</span>
+        <img class="w-8 h-8 rounded-full"
+             src="../assets/ChatGPT Image May 29, 2026, 08_00_37 AM.png"
+             alt="user photo">
+      </a>
+
+    </div>
+
+    <form class="max-w-md mx-auto">
+      <label for="search" class="block mb-2.5 text-sm font-medium text-heading sr-only">Search</label>
+      <div class="relative">
+        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+          <svg class="w-4 h-4 text-body" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
+          </svg>
+        </div>
+        <input type="search" id="search" class="block w-full p-3 ps-9 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body" placeholder="Search" required />
+        <button type="button" class="absolute end-1.5 bottom-1.5 text-white bg-[#4270ca] hover:bg-brand-strong box-border border border-transparent focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded text-xs px-3 py-1.5 focus:outline-none">Search</button>
+      </div>
+    </form>
+  </div>
+</nav>
+
+<section class=" mx-[450px] mt-[50px] relative rounded-3xl overflow-hidden bg-gradient-to-br from-stone-800 to-stone-900 border border-stone-700 ">
+      <div class="absolute inset-0 opacity-15 " >
+        <img src="../assets/Desain tanpa judul.png" alt="" class="w-full h-full object-cover">
+      </div>
+      <div class="relative px-8 py-20 md:px-16 max-w-2xl">
+        <p class="text-[#4270ca] text-sm font-medium tracking-widest uppercase mb-4">Koleksi Terbaru</p>
+        <h1 class="font-display text-5xl md:text-6xl font-extrabold leading-tight mb-6 text-stone-50">Temukan <span class="text-[#134cbd]">Produk</span> Terbaik</h1>
+        <p class="text-stone-400 text-lg mb-8">Belanja nyaman, kualitas terjamin, pengiriman cepat ke seluruh nusantara.</p>
+        <button onclick="navigate('Product')" class="bg-[#4270ca] hover:bg-[#1a62f0] text-stone-950 font-display font-bold px-8 py-4 rounded-xl transition-all duration-200 hover:shadow-xl hover:shadow-[#4682f4] active:scale-[0.98]">
+          BELANJA SEKARANG →
+        </button>
+      </div>
+    </section>
+
+
+<!-- <section class="bg-neutral-primary">
+    <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16">
+        <div class="bg-neutral-secondary-soft border border-default rounded-base p-8 md:p-12 mb-8">
+            <span class="inline-flex items-center bg-brand-softer border border-brand-subtle text-fg-brand-strong text-xs font-medium px-1.5 py-0.5 rounded-sm">
+                <svg class="w-3 h-3 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 6H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1Zm7 11-6-2V9l6-2v10Z"/></svg>
+                Tutorial
+            </span>
+            <h1 class="text-heading tracking-tighter text-3xl md:text-5xl font-bold my-6">How to quickly deploy <br>a static website</h1>
+            <p class="md:text-lg font-normal text-body mb-6">Static websites are now used to bootstrap lots of websites and are becoming the basis for a variety of tools that even influence web designers.</p>
+            <button type="button" class="inline-flex items-center justify-center text-white bg-brand hover:bg-brand-strong box-border border border-transparent focus:ring-4 focus:ring-brand-medium shadow-xs font-medium rounded-base text-base px-5 py-3 focus:outline-none">
+                Getting started
+                <svg class="w-4 h-4 ms-1.5 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/></svg>
+            </button>
+        </div>
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="bg-neutral-secondary-soft border border-default rounded-base p-8 md:p-12">
+                <span class="inline-flex items-center bg-brand-softer border border-brand-subtle text-fg-brand-strong text-xs font-medium px-1.5 py-0.5 rounded-sm">
+                    <svg class="w-3 h-3 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 7h.01m3.486 1.513h.01m-6.978 0h.01M6.99 12H7m9 4h2.706a1.957 1.957 0 0 0 1.883-1.325A9 9 0 1 0 3.043 12.89 9.1 9.1 0 0 0 8.2 20.1a8.62 8.62 0 0 0 3.769.9 2.013 2.013 0 0 0 2.03-2v-.857A2.036 2.036 0 0 1 16 16Z"/></svg>
+                    Design
+                </span>
+                <h2 class="text-heading text-3xl font-semobild my-4">Start with Flowbite Design System</h2>
+                <p class=" font-normal text-body mb-4">Static websites are now used to bootstrap lots of websites and are becoming the basis for a variety of tools that even influence both web designers and developers.</p>
+                <a href="#" class="text-fg-brand hover:underline font-medium text-lg inline-flex items-center">Read more
+                    <svg class="w-6 h-6 rtl:rotate-180 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/></svg>
+                </a>
+            </div>
+            <div class="bg-neutral-secondary-soft border border-default rounded-base p-8 md:p-12">
+                <span class="inline-flex items-center bg-brand-softer border border-brand-subtle text-fg-brand-strong text-xs font-medium px-1.5 py-0.5 rounded-sm">
+                    <svg class="w-3 h-3 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m8 8-4 4 4 4m8 0 4-4-4-4m-2-3-4 14"/></svg>
+                    Code
+                </span>
+                <h2 class="text-heading text-3xl font-semobild my-4">Best react libraries around the web</h2>
+                <p class=" font-normal text-body mb-4">Static websites are now used to bootstrap lots of websites and are becoming the basis for a variety of tools that even influence both web designers and developers.</p>
+                <a href="#" class="text-fg-brand hover:underline font-medium text-lg inline-flex items-center">Read more
+                    <svg class="w-6 h-6 rtl:rotate-180 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</section> -->
+
+<div class="flex flex-row flex-wrap justify-center mt-10 mx-100 gap-3" id="Product"></div>
+
+
+
+
+<script src="../path/to/flowbite/dist/flowbite.min.js"></script>
+<script src="../script/app.js"></script>
+</body>
+</html>
