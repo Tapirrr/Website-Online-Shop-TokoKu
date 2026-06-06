@@ -1,3 +1,28 @@
+const email = sessionStorage.getItem("email");
+// Cek status login saat homepage dimuat
+function checkLoginStatus() {
+  const profileImage = sessionStorage.getItem("profileImage");
+  const btnLogin = document.getElementById("btn-login");
+  const btnProfile = document.getElementById("btn-profile");
+  const navImg = document.getElementById("nav-profile-img");
+
+  if (email) {
+    btnLogin.classList.add("hidden");
+    btnProfile.classList.remove("hidden");
+    if (profileImage && navImg) {
+      navImg.src = profileImage; // set foto sesuai user yang login
+    }
+  } else {
+    btnLogin.classList.remove("hidden");
+    btnProfile.classList.add("hidden");
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  checkLoginStatus();
+});
+
+
 let keranjang = JSON.parse(localStorage.getItem("keranjang") ?? "[]");
 
 function simpanKeranjang() {

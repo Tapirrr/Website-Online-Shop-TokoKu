@@ -1,6 +1,12 @@
 [
     {
         "email": "tokyohummel@gmail.com",
-        "password": "admin123"
+        "password": "admin123",
+        "Image": "../assets/Gemini_Generated_Image_x6c4c1x6c4c1x6c4-removebg-preview (2).png"
+    },
+    {
+        "email": "zata@gmail.com",
+        "password": "admin123",
+        "Image": "../assets/iem.png"
     }
 ]

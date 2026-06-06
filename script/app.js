@@ -1,20 +1,60 @@
+const email = sessionStorage.getItem("email");
 // Cek status login saat homepage dimuat
 function checkLoginStatus() {
-  const email = sessionStorage.getItem("email");
+  const profileImage = sessionStorage.getItem("profileImage");
   const btnLogin = document.getElementById("btn-login");
   const btnProfile = document.getElementById("btn-profile");
+  const navImg = document.getElementById("nav-profile-img");
 
   if (email) {
-    // Sudah login → sembunyikan Login, tampilkan Profile
     btnLogin.classList.add("hidden");
     btnProfile.classList.remove("hidden");
+    if (profileImage && navImg) {
+      navImg.src = profileImage;
+    }
   } else {
-    // Belum login → tampilkan Login, sembunyikan Profile
     btnLogin.classList.remove("hidden");
     btnProfile.classList.add("hidden");
   }
 }
-checkLoginStatus();
+document.addEventListener("DOMContentLoaded", function () {
+  checkLoginStatus();
+});
+
+function cekLogin() {
+  // const email = sessionStorage.getItem("email");
+  if (!email) {
+    const konfirmasi = confirm("Kamu harus login dulu!\nMau ke halaman login?");
+    if (konfirmasi) window.location.href = "../view/login.html";
+    return false;
+  }
+  return true;
+}
+
+
+function searchProduk() {
+  const keyword = document.getElementById("search").value.toLowerCase().trim();
+
+  if (keyword === "") {
+    renderProduk(dataStore); // tampilkan semua produk kalau search kosong
+    return;
+  }
+
+  const hasil = dataStore.filter(
+    (item) =>
+      item.name.toLowerCase().includes(keyword) ||
+      item.category.toLowerCase().includes(keyword),
+  );
+
+  if (hasil.length === 0) {
+    document.getElementById("Product").innerHTML = `
+      <p class="text-gray-400 text-center col-span-full py-10">Produk tidak ditemukan</p>
+    `;
+    return;
+  }
+
+  renderProduk(hasil);
+}
 
 function filterHarga() {
   const filter = document.getElementById("filter-harga").value;
@@ -31,7 +71,6 @@ function filterHarga() {
 
 let kategoriAktif = "semua";
 
-// generate tombol kategori dari data
 function renderKategori(data) {
   const container = document.getElementById("filter-kategori");
   const kategoriList = [
@@ -49,11 +88,9 @@ function renderKategori(data) {
   });
 }
 
-// handle klik tombol kategori
 function pilihKategori(btn) {
   kategoriAktif = btn.dataset.kategori;
 
-  // update style tombol
   document.querySelectorAll(".kategori-btn").forEach((b) => {
     b.classList.remove("bg-blue-600", "text-white", "border-blue-600");
     b.classList.add("border-gray-300", "text-gray-600");
@@ -64,7 +101,48 @@ function pilihKategori(btn) {
   filterProduk();
 }
 
+// search pakai filterProduk
+function searchProduk() {
+  filterProduk();
+}
+
+function filterProduk() {
+  const keyword = document.getElementById("search").value.toLowerCase().trim();
+  const filter = document.getElementById("filter-harga").value;
+
+  let hasil = [...dataStore];
+
+  // filter kategori
+  if (kategoriAktif !== "semua") {
+    hasil = hasil.filter((item) => item.category === kategoriAktif);
+  }
+
+  // filter keyword
+  if (keyword !== "") {
+    hasil = hasil.filter(
+      (item) =>
+        item.name.toLowerCase().includes(keyword) ||
+        item.category?.toLowerCase().includes(keyword),
+    );
+  }
+
+  // sort harga
+  if (filter === "termahal") hasil.sort((a, b) => b.price - a.price);
+  else if (filter === "termurah") hasil.sort((a, b) => a.price - b.price);
+
+  if (hasil.length === 0) {
+    document.getElementById("Product").innerHTML = `
+      <p class="text-gray-400 text-center col-span-full py-10">Produk tidak ditemukan</p>
+    `;
+    return;
+  }
+
+  renderProduk(hasil);
+}
+
+
 function tambahKeKeranjang(id) {
+  if (!cekLogin()) return;
   const produk = dataStore.find(item => item.id === id);
   if (!produk) return;
 
@@ -103,45 +181,7 @@ function updateBadge() {
 
 updateBadge();
 
-// fungsi utama filter — gabungan search + kategori + harga
-function filterProduk() {
-  const keyword = document.getElementById("search").value.toLowerCase().trim();
-  const filter = document.getElementById("filter-harga").value;
 
-  let hasil = [...dataStore];
-
-  // filter kategori
-  if (kategoriAktif !== "semua") {
-    hasil = hasil.filter((item) => item.category === kategoriAktif);
-  }
-
-  // filter keyword
-  if (keyword !== "") {
-    hasil = hasil.filter(
-      (item) =>
-        item.name.toLowerCase().includes(keyword) ||
-        item.category?.toLowerCase().includes(keyword),
-    );
-  }
-
-  // sort harga
-  if (filter === "termahal") hasil.sort((a, b) => b.price - a.price);
-  else if (filter === "termurah") hasil.sort((a, b) => a.price - b.price);
-
-  if (hasil.length === 0) {
-    document.getElementById("Product").innerHTML = `
-      <p class="text-gray-400 text-center col-span-full py-10">Produk tidak ditemukan</p>
-    `;
-    return;
-  }
-
-  renderProduk(hasil);
-}
-
-// search pakai filterProduk
-function searchProduk() {
-  filterProduk();
-}
 
 function renderStars(rate) {
   let stars = "";
@@ -159,10 +199,6 @@ function renderStars(rate) {
 
 
 
-// filterHarga pakai filterProduk
-function filterHarga() {
-  filterProduk();
-}
 
 const SUPABASE_URL = "https://tjcjkbgbfusalufvvcgb.supabase.co";
 const SUPABASE_KEY =
@@ -253,30 +289,8 @@ function renderProduk(data) {
   document.getElementById("Product").innerHTML = html;
 }
 
-function searchProduk() {
-  const keyword = document.getElementById("search").value.toLowerCase().trim();
-
-  if (keyword === "") {
-    renderProduk(dataStore); // tampilkan semua produk kalau search kosong
-    return;
-  }
-
-  const hasil = dataStore.filter(
-    (item) =>
-      item.name.toLowerCase().includes(keyword) ||
-      item.category.toLowerCase().includes(keyword),
-  );
-
-  if (hasil.length === 0) {
-    document.getElementById("Product").innerHTML = `
-      <p class="text-gray-400 text-center col-span-full py-10">Produk tidak ditemukan</p>
-    `;
-    return;
-  }
-
-  renderProduk(hasil);
-}
-
 function navigate(homepage) {
   window.location.href = "homepage.html";
 }
+
+

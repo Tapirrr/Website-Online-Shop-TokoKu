@@ -10,9 +10,9 @@ async function login() {
   for (let i = 0; i < data.length; i++) {
     if (email === data[i].email && password === data[i].password) {
       sessionStorage.setItem("email", data[i].email);
+      sessionStorage.setItem("profileImage", data[i].Image);
 
       berhasil = true;
-
       window.location.href = "homepage.html";
       break;
     }
@@ -22,4 +22,3 @@ async function login() {
     alert("email atau password salah!");
   }
 }
-
