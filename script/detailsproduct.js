@@ -1,88 +1,66 @@
-// const Params = new URLSearchParams(window.location.search)
+function navigate(homepage) {
+  window.location.href = "homepage.html"
+}
 
-// const productId = Params.get("id")
-// const detailProduct = document.getElementById("detailProduct")
+ function beliSekarang() {
+            let konfirmasi = confirm("Apakah Anda yakin ingin checkout?");
+            
+            if (konfirmasi) {
+                alert("Checkout berhasil!");
+            }
+        }
 
-// const api = "https://fakestoreapi.com/products";
+function checkLoginStatus() {
+  const email = sessionStorage.getItem("email");
+  const btnLogin = document.getElementById("btn-login");
+  const btnProfile = document.getElementById("btn-profile");
 
-// let dataStore = [];
+  if (email) {
+    btnLogin.classList.add("hidden");
+    btnProfile.classList.remove("hidden");
+  } else {
+    btnLogin.classList.remove("hidden");
+    btnProfile.classList.add("hidden");
+  }
+}
+checkLoginStatus()
 
-// // ambil data
-// fetch(api)
-//   .then((res) => res.json())
-//   .then((data) => {
-//     dataStore = data;
-//     renderdetailProduct(productId);
-//   });
+function tambahKeKeranjang(product) {
+  let keranjang = JSON.parse(localStorage.getItem("keranjang") ?? "[]");
 
-//   function renderdetailProduct(productId) {
-//   let html = "";
+  const existing = keranjang.find(item => item.id === product.id);
+  if (existing) {
+    existing.qty += 1;
+  } else {
+    keranjang.push({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+      qty: 1
+    });
+  }
 
-//   data.forEach((id, index) => {
-//     html += `
-//         <div>
-//         <p>${item.title}</p>
-//         <p>$${item.price}</p>
-//         <img src="${item.image}" width="100">
-//         <br>
-//         <button onclick="lihat(${index})">Detail</button>
-//         <button onclick="keranjang(${item.id})">+ Keranjang</button>
-//         <br><br>
-//       </div>
-//     `;
-//   });
+  localStorage.setItem("keranjang", JSON.stringify(keranjang));
+  updateBadge();
+  alert(`${product.name} ditambahkan ke keranjang!`);
+}
 
-//   document.getElementById("detailProduct").innerHTML = html;
-// }
-// renderdetailProduct(productId)
+function updateBadge() {
+  const keranjang = JSON.parse(localStorage.getItem("keranjang") ?? "[]");
+  const badge = document.getElementById("cart-badge");
+  if (!badge) return;
+  const total = keranjang.reduce((sum, item) => sum + item.qty, 0);
+  if (total > 0) {
+    badge.textContent = total;
+    badge.classList.remove("hidden");
+  } else {
+    badge.classList.add("hidden");
+  }
+}
 
-// const Params = new URLSearchParams(window.location.search)
+updateBadge();
 
-// const productId = Params.get("id")
-
-// let dataStore = [];
-
-// // ambil data
-// fetch(api)
-//   .then(res => res.json())
-//   .then(product => {
-//       dataStore = product;
-//     });
-
-//     // render produk
-//     function renderdetailProduct(item) {
-//         let html = "";
-
-//         id.forEach((id, index) => {
-//             html += `
-//           <h1>${item.title}</h1>
-//   <a href="#" class="flex flex-col items-center bg-neutral-primary-soft p-6 border border-default rounded-base shadow-xs">
-//       <img
-//         class="object-cover w-full rounded-base h-64 md:h-auto md:w-48 mb-4 md:mb-0"
-//         src="${item.image}"
-//         alt="">
-//       <div class="flex flex-col justify-between md:p-4 leading-normal">
-//           <h5 class="mb-2 text-2xl font-bold tracking-tight text-heading">
-//             ${item.title}
-//           </h5>
-//           <p class="mb-6 text-body">
-//             ${item.description}
-//           </p>
-//           <div>
-//               <button type="button" class="inline-flex items-center w-auto text-body bg-neutral-secondary-medium">
-//                   Read more
-//               </button>
-//           </div>
-//       </div>
-//   </a>
-//             `;
-//         });
-
-//         document.getElementById("detailProduct").innerHTML = html;
-//     }
-//     renderdetailProduct(productId);
-
-// const api = "https://fakestoreapi.com/products/${productiId}";
 
 const detailProduct = document.getElementById("detailProduct");
 
@@ -91,7 +69,7 @@ const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 
 const Params = new URLSearchParams(window.location.search);
 const productId = Params.get("id");
-// console.log(productId);
+
 
   function renderStars(rate) {
   let stars = '';
@@ -126,55 +104,7 @@ console.log("Keys:", Object.keys(data[0]));
 
     detailProduct.innerHTML = ` 
 
-    <nav class="bg-[#134cbd] w-full z-20 top-0 border-b-2 sticky top-0 z-40">
-  <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-    <button onclick="navigate('home')" class="flex items-center space-x-3 rtl:space-x-reverse">
-      <img src="../assets/Gemini_Generated_Image_x6c4c1x6c4c1x6c4-removebg-preview (2).png" class="h-7" alt="" />
-      <p class="h-7 font-bold self-center text-xl text-white font-semibold whitespace-nowrap">Toko<span class="text-white">Ku</span></p>
-    </button>
-
-    <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse gap-3">
-
-      <button onclick="" class="">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-          <path d="M0 0h24v24H0z" fill="none" />
-          <path fill="#fff" d="M17 18a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2M1 2h3.27l.94 2H20a1 1 0 0 1 1 1c0 .17-.05.34-.12.5l-3.58 6.47c-.34.61-1 1.03-1.75 1.03H8.1l-.9 1.63l-.03.12a.25.25 0 0 0 .25.25H19v2H7a2 2 0 0 1-2-2c0-.35.09-.68.24-.96l1.36-2.45L3 4H1zm6 16a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2m9-7l2.78-5H6.14l2.36 5z" />
-        </svg>
-      </button>
-
-      <!-- Tampil saat BELUM login -->
-      <a id="btn-login" href="login.html"
-         class="text-white bg-[#4270ca] hover:bg-white/30 font-medium rounded-lg text-sm px-4 py-2 transition">
-        Login
-      </a>
-
-      <!-- Tampil saat SUDAH login (hidden by default) -->
-      <a id="btn-profile" href="profile.html"
-         class="hidden flex text-sm bg-neutral-primary rounded-full md:me-0 focus:ring-4 focus:ring-neutral-tertiary">
-        <span class="sr-only">Open user profile</span>
-        <img class="w-8 h-8 rounded-full"
-             src="../assets/ChatGPT Image May 29, 2026, 08_00_37 AM.png"
-             alt="user photo">
-      </a>
-
-    </div>
-
-    <form class="max-w-md mx-auto">
-      <label for="search" class="block mb-2.5 text-sm font-medium text-heading sr-only">Search</label>
-      <div class="relative">
-        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-          <svg class="w-4 h-4 text-body" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-            <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
-          </svg>
-        </div>
-        <input type="search" id="search" class="block w-full p-3 ps-9 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body" placeholder="Search" required />
-        <button type="button" class="absolute end-1.5 bottom-1.5 text-white bg-[#4270ca] hover:bg-brand-strong box-border border border-transparent focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded text-xs px-3 py-1.5 focus:outline-none">Search</button>
-      </div>
-    </form>
-  </div>
-</nav>
-
-      <div class="max-w-5xl mx-auto p-8 flex flex-col md:flex-row gap-10">
+      <div class="mt-[50px] max-w-5xl mx-auto p-8 flex flex-col md:flex-row gap-10">
 
     <!-- Gambar -->
     <div class="bg-gray-100 rounded-2xl flex items-center justify-center w-full md:w-[520px] h-[420px] shrink-0">
@@ -233,17 +163,17 @@ console.log("Keys:", Object.keys(data[0]));
       <!-- Tombol -->
       <div class="flex gap-3 mt-2">
         <button
-          onclick="tambahKeKeranjang(${product.id})"
+          onclick="beliSekarang()"
           ${product.stok <= 0 ? 'disabled' : ''}
-          class="flex-grow bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed active:scale-[0.98] transition-all text-white text-sm font-medium rounded-xl px-6 py-3">
+          class="cursor-pointer flex-grow bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed active:scale-[0.98] transition-all text-white text-sm font-medium rounded-xl px-6 py-3">
           Beli Sekarang
         </button>
         <button
-          onclick="tambahKeKeranjang(${product.id})"
-          ${product.stok <= 0 ? 'disabled' : ''}
-          class="border border-blue-600 text-blue-600 hover:bg-blue-50 disabled:border-gray-300 disabled:text-gray-300 disabled:cursor-not-allowed active:scale-[0.98] transition-all rounded-xl px-4 py-3">
-          <span class="icon-[mdi--cart-outline]"></span>
-        </button>
+  onclick="tambahKeKeranjang(${JSON.stringify(product).replace(/"/g, '&quot;')})"
+  ${product.stok <= 0 ? 'disabled' : ''}
+  class="border border-blue-600 text-blue-600 hover:bg-blue-50 disabled:border-gray-300 disabled:text-gray-300 disabled:cursor-not-allowed active:scale-[0.98] transition-all rounded-xl px-4 py-3">
+  <span class="icon-[mdi--cart-outline]"></span>
+</button>
       </div>
 
     </div>

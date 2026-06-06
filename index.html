@@ -29,3 +29,40 @@
     </div>
 </body>
 </html>
+
+<div class="bg-[#ffff] border border-gray-100 rounded-2xl overflow-hidden w-72 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
+   <a href="../view/detailProduct.html?id=${item.id}" class="bg-gray-50 flex items-center justify-center h-52 relative"></a>
+
+          <img 
+            class="h-40 object-contain p-4 transition-transform duration-300 hover:scale-105" 
+            src="${item.image}" 
+            alt="${item.name}" 
+          />
+          <span class="absolute top-2.5 left-2.5 bg-blue-50 text-blue-800 text-[11px] font-medium px-3 py-1 rounded-full">
+            ${item.category ?? '-'}
+          </span>
+
+        <div class="p-4 flex flex-col flex-grow gap-2">
+
+          <p class="text-xs text-gray-400 uppercase tracking-wide">${item.category ?? '-'}</p>
+
+          <h5 class="text-sm font-medium text-gray-800 line-clamp-2 leading-snug min-h-[40px]">
+            ${item.name}
+          </h5>
+
+          <div class="flex items-center gap-1">
+            ${renderStars(item.rating ?? 0)}
+            <span class="text-xs text-gray-400 ml-1">${item.rating ?? 0} (${item.rating_count ?? 0})</span>
+          </div>
+
+          <p class="text-base font-medium text-blue-600">
+            Rp${Number(item.price).toLocaleString('id-ID')}
+          </p>
+
+          <button class="mt-auto bg-blue-600 hover:bg-blue-700 active:scale-[0.98] transition-all text-white text-sm font-medium rounded-lg px-4 py-2.5 flex items-center justify-center gap-2">
+            <span class="icon-[mdi--cart-outline]"></span>
+            Tambah ke Keranjang
+          </button>
+
+        </div>
+      </div>
