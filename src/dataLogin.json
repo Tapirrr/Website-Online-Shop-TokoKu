@@ -8,5 +8,10 @@
         "email": "zata@gmail.com",
         "password": "admin123",
         "Image": "../assets/iem.png"
+    },
+    {
+        "email": "farajtamir@gmail.com",
+        "password": "admin123",
+        "Image": "../assets/unnamed.webp"
     }
 ]
